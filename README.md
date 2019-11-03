@@ -202,6 +202,24 @@ You can find overview of architecture below;
 
 ![System-Architecture](https://github.com/altugcagri/boun-swe-599/blob/master/docs/images/mmsr-architecture.png)
 
+## Continious Integration & Continious Delivery
+
+### CircleCI
+
+[CircleCI](https://circleci.com/docs/) is used for the continuous integration and continuous delivery. There are three pipeline integrations on the project. I created one pipeline for master branch on github. The results can be traced the link below;
+
+[![CircleCI](https://circleci.com/gh/altugcagri/boun-swe-599.svg?style=svg)](https://circleci.com/gh/altugcagri/boun-swe-599)
+
+### Backend Pipeline
+
+For the back end pipeline there are three jobs on the workflow. In the first Job it runs the tests. If the test job gets results as success, second job starts. In the second job it runs build commands. It creates a jar file and puts it in a docker image. After that, it pushes the image to AWS repositories and starts a new container from pushed image on the AWS environment.
+
+## Static Code Analysis
+
+In order to anlysis the code I am using sonarcloud integration. Through circleCI pipelines code will be sent to sonar cloud and be analysied. Static code analysis results will be reached from the link below  
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=altugcagri_boun-swe-599&metric=alert_status)](https://sonarcloud.io/dashboard?id=altugcagri_boun-swe-599)
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:

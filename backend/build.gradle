@@ -1,12 +1,31 @@
 plugins {
 	id 'org.springframework.boot' version '2.2.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id "org.sonarqube" version "2.7.1"
+	id 'jacoco'
 	id 'java'
 }
+
+apply plugin: 'jacoco'
+
+def jacocoMergeFiles = "${buildDir}/jacoco/test.exec"
 
 group = 'com.altugcagri'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+jacoco {
+	toolVersion = "0.8.4"
+	reportsDir = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
+	}
+}
 
 configurations {
 	compileOnly {
@@ -17,6 +36,20 @@ configurations {
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
+}
+
+sonarqube {
+	properties {
+		property "sonar.jacoco.reportPaths", jacocoMergeFiles
+		property "sonar.test.inclusions", "**/*Test*/**"
+		property "sonar.test.exclusions", "**/*Test*/**"
+		property "sonar.exclusions", ["src/main/java/com/fellas/bespoke/persistence/model/*",
+									  "src/main/java/com/fellas/bespoke/config/*",
+									  "src/main/java/com/fellas/bespoke/controller/dto/request/*",
+									  "src/main/java/com/fellas/bespoke/controller/dto/response/*",
+									  "src/main/java/com/fellas/bespoke/security/UserPrincipal*"]
+
+	}
 }
 
 ext {

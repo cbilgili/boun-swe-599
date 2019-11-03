@@ -1,0 +1,80 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+defaults: &defaults
+  docker:
+    - image:  circleci/slim-base
+  working_directory: ~/repo
+
+backend-defaults: &backend-defaults
+  <<: *defaults
+  docker:
+    - image:  circleci/openjdk:11-jdk
+  working_directory: ~/repo/backend
+  environment:
+     # Customize the JVM maximum heap limit
+     JVM_OPTS: -Xmx3200m
+     TERM: dumb
+
+version: 2
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      
+  test-backend:
+    <<: *backend-defaults
+    steps:
+      - checkout:
+          path: ~/repo
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: gradle dependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      # run tests!
+      - run: gradle test
+      # send sonar!
+      #- run: gradle test sonarqube -Dsonar.analysis.mode=publish -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.organization=${SONAR_ORGANIZATION} -Dsonar.host.url=https://sonarcloud.io  -Dsonar.login=${SONAR_LOGIN}
+      
+  build-backend:
+    <<: *backend-defaults
+    steps:
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker:
+          docker_layer_caching: true
+      # Build
+      - run: gradle build
+
+workflows:
+ version: 2
+ checkout-test-build-deploy:
+   jobs:
+     - checkout:
+         filters:
+           branches:
+             only:
+               - master
+     - test-backend:
+         requires:
+           - checkout
+         filters:
+           branches:
+             only:
+               - master
+     - build-backend:
+         requires:
+           - test-backend
+         filters:
+           branches:
+             only:
+               - master

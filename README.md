@@ -120,7 +120,7 @@ It runs the backend project in dev profile. It means that application will read 
 ### Production environment:
 
 ```sh
-$ nohup java -jar -Dspring.profiles.active=prod {Jar_File_Location}/com.altugcagri.smep-0.0.1-SNAPSHOT.jar &
+$ nohup java -jar -Dspring.profiles.active=prod {Jar_File_Location}/mmsr-0.0.1-SNAPSHOT.jar &
 ```
 
 `{Jar_File_Location}` is the directory where you keep your jar file. Please change it according to your settings
@@ -135,7 +135,7 @@ After building the project running the project requires the steps below;
 
 Go to web folder under the workspace
 
-Since project requires com.altugcagri.smep-service, it is recomended to run backend first.
+Since project requires mmsr-service, it is recomended to run backend first.
 
 Before run the frontend application, please run the command below; 
 

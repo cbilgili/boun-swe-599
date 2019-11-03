@@ -188,6 +188,20 @@ BackEnd:
 $ docker run -p 8080:8080 {ContainerName}
 ```
 
+## System Architecture
+
+MMSR-service will be served in cloud environment. AWS is choosen for the serving all frontend, backend and database. Backend service will be running as a docker container. These containers will be served in Elastic Container Service whic is a container managemenet system. This backend service will be easily auto scailale. 
+
+Front end will be served iin Simple Storage Service which is simple a file bucket. This service has static web hosting property. By using this property frontend will be eaisly reached. 
+
+Data base will be a postgresql service running on the RDS which is Aws database service.
+
+This is just a simple and easy system to build. I lacks of security, elb, log monitoring and etc. However, our priority is the functionality of the system for now. 
+
+You can find overview of architecture below;
+
+![System-Architecture](https://github.com/altugcagri/boun-swe-599/blob/master/docs/images/mmsr-architecture.png)
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:

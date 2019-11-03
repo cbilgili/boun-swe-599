@@ -1,0 +1,2 @@
+# boun-swe-599
+The project is to develop a web based tool to allow its user model their requirements, mark the ones that are mandatory or implemented, keep track of the themes and teams, and help analysing the model to find the optimal releases. The model is transformed to SMT-LİB v2 clauses and an external solver will be used. The main tasks are to build the user interface, server-client architecture, and the model transformation.

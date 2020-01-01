@@ -1,0 +1,8 @@
+.container-fluid {
+    height: 100%
+}
+
+.container-fluid > div {
+    overflow-y: scroll;
+    height: 100%;
+}

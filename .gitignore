@@ -12,7 +12,7 @@ HELP.md
 **/.vscode/
 
 # dependencies
-**/frontend/node_modules
+/node_modules
 **/frontend/.pnp
 **/frontend.pnp.js
 

@@ -91,7 +91,7 @@ class NodeEditor extends React.Component {
 
                 return <div>
                     <div className="modal-header">
-                        <h2 className="modal-title">Event Properties</h2>
+                        <h2 className="modal-title">Refinement Properties</h2>
                     </div>
                     <div className="modal-body">
                         {name}
@@ -99,7 +99,7 @@ class NodeEditor extends React.Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
-                            Event
+                            Refinement
                         </button>
                         <button type="button" className="btn btn-primary" onClick={() => this.closeNodeEditor()}>Close
                         </button>
@@ -141,7 +141,7 @@ class NodeEditor extends React.Component {
 
                 return <div>
                     <div className="modal-header">
-                        <h2 className="modal-title">Event Properties</h2>
+                        <h2 className="modal-title">Contribution Properties</h2>
                     </div>
                     <div className="modal-body">
                         {weight}

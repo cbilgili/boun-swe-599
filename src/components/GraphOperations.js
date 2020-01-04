@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {saveFile, loadFile} from '../redux/actions/fileActions';
-import {clearGraph, smtSolve,startEditingNodeType} from '../redux/actions/graphActions'
+import {saveFile, loadFile,smtSolve} from '../redux/actions/fileActions';
+import {clearGraph, startEditingNodeType} from '../redux/actions/graphActions'
 
 class GraphOperations extends React.Component {
 

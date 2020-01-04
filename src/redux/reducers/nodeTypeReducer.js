@@ -30,6 +30,7 @@ export default function nodeTypeReducer(state, action) {
         case 'LOAD_DATA': {
             return action.data.nodeTypes || state;
         }
+        case '@@redux/INIT':
         case '@@INIT':
             return {
                 array: [1, 2],

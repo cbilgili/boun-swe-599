@@ -41,19 +41,15 @@ public class SmtServiceImpl implements SmtService {
         final File outPutFile = new  File("/mathsat/output");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(outPutFile))) {
-            log.info("try icersine girdi");
             String line;
             while ((line = reader.readLine()) != null) {
                 log.info(line);
                 response.append(line);
             }
-            log.info("try dan cikti");
         }
 
         smtFile.delete();
         outPutFile.delete();
-        log.info(String.valueOf(response));
-        log.info("hey");
         log.info(response.toString());
         return response.toString();
     }

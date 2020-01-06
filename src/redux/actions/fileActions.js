@@ -1,4 +1,5 @@
 import {saveAs} from 'file-saver';
+import axios from 'axios';
 
 export function saveFile() {
     return (_, getState) => {
@@ -20,10 +21,33 @@ export function loadFile(blob) {
     }
 }
 
-export function smtSolve() {
+export function downloadSmt() {
+
+    return dispatch => {
+        const smtOutput = dispatch(smtSolve());
+
+        const blob = new Blob([smtOutput], {type: 'text'});
+
+        if (window.navigator.msSaveOrOpenBlob) { // IE10+
+            window.navigator.msSaveOrOpenBlob(blob, 'output.smt2');
+        } else { // Others
+            let a = document.createElement("a"),
+                url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = 'output.smt2';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+
+}
+
+function smtSolve() {
     let optimization = ` ;;%%\r\n;;Optimization:\r\n;;%%\r\n(maximize (+ NCC PVC))\r\n(maximize (+ pen.auto ben.auto))\r\n(minimize unsat_requirements)\r\n(check-sat)\r\n(load-objective-model 0)\r\n(get-model)\r\n(exit)\r\n`;
-
-
     return (dispatch, getState) => {
         let funs = [];
         let goals = [];
@@ -312,23 +336,23 @@ export function smtSolve() {
         smtOutput += eff;
         smtOutput += `\r\n\r\n`;
         smtOutput += optimization;
+        return smtOutput;
+    }
+}
 
-        const blob = new Blob([smtOutput], {type: 'text'});
 
-        if (window.navigator.msSaveOrOpenBlob) { // IE10+
-            window.navigator.msSaveOrOpenBlob(blob, 'output.smt2');
-        } else { // Others
-            let a = document.createElement("a"),
-                url = URL.createObjectURL(blob);
-            a.href = url;
-            a.download = 'output.smt2';
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(function () {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            }, 0);
+export function postSmt(url) {
 
-        }
+    return dispatch => {
+        const smtRequest = dispatch(smtSolve());
+
+        axios.post(url, null, {
+            params: {
+                smtRequest
+            }
+        })
+            .then(response => console.log(response))
+            .catch(err => console.warn(err));
+
     }
 }

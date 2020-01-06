@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {saveFile, loadFile,smtSolve} from '../redux/actions/fileActions';
+import {saveFile, loadFile, downloadSmt, postSmt} from '../redux/actions/fileActions';
 import {clearGraph, startEditingNodeType} from '../redux/actions/graphActions'
 
 class GraphOperations extends React.Component {
@@ -9,14 +9,20 @@ class GraphOperations extends React.Component {
     render() {
         return (
             <div className="well">
+
                 <div className="btn-group mr-2" role="group" aria-label="First group">
-                    <label className="btn btn-info" onClick={this.props.startEditingNodeType}><i
-                        className="glyphicon glyphicon-edit"/> Edit Goal Types
+                    <label className="btn btn-info" onClick={this.props.clearGraph}>
+                        <i className="glyphicon glyphicon-erase"/> Clear Graph
                     </label>
                 </div>
                 <div className="btn-group mr-2" role="group" aria-label="First group">
-                    <label className="btn btn-info" onClick={this.props.saveFile}><i
-                        className="glyphicon glyphicon-floppy-save"/> Download Json File
+                    <label className="btn btn-info" onClick={this.props.startEditingNodeType}>
+                        <i className="glyphicon glyphicon-edit"/> Edit Goal Types
+                    </label>
+                </div>
+                <div className="btn-group mr-2" role="group" aria-label="First group">
+                    <label className="btn btn-info" onClick={this.props.saveFile}>
+                        <i className="glyphicon glyphicon-floppy-save"/> Download Json File
                     </label>
                 </div>
                 <div className="btn-group mr-2" role="group" aria-label="First group">
@@ -27,21 +33,18 @@ class GraphOperations extends React.Component {
                     </label>
                 </div>
                 <div className="btn-group mr-2" role="group" aria-label="First group">
-                    <label className="btn btn-info" onClick={this.props.smtSolve}><i
-                        className="glyphicon glyphicon-floppy-save"/> Save SMT2 File
+                    <label className="btn btn-info" onClick={this.props.downloadSmt}>
+                        <i className="glyphicon glyphicon-floppy-save"/> Save SMT2 File
                     </label>
                 </div>
-                <div className="btn-group mr-2" role="group" aria-label="First group">
-                    <label className="btn btn-info">
-                        <i className="glyphicon glyphicon-upload"/>
-                        Upload SMT2 File <input type="file" accept=".smt2" hidden
-                                                onChange={(event) => this.props.loadFile(event.target.files[0])}/>
-                    </label>
-                </div>
-                <div className="btn-group mr-2" role="group" aria-label="First group">
-                    <label className="btn btn-info" onClick={this.props.clearGraph}><i
-                        className="glyphicon glyphicon-erase"/> Clear Graph
-                    </label>
+                <div className="input-group">
+                    <div className="btn-group mr-2" role="group" aria-label="First group">
+                        <label className="btn btn-info">
+                            <i className="glyphicon glyphicon-play"/>
+                            Solve <input type="text" className="form-control"
+                                         onClick={(event) => this.props.postSmt(event.target.value)}/>
+                        </label>
+                    </div>
                 </div>
             </div>
         );
@@ -59,7 +62,8 @@ const mapDispatchToProps = {
     saveFile,
     loadFile,
     clearGraph,
-    smtSolve,
+    downloadSmt,
+    postSmt,
     startEditingNodeType
 
 }

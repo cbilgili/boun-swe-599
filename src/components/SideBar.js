@@ -12,9 +12,6 @@ class SideBar extends React.Component {
         const transitionTypes = this.props.transitions.map((id, i) => <Transition key={i} id={id}/>);
         return (
             <div className="col-md-2">
-                <div className="page-header">
-                    <h1>NH Release Tool</h1>
-                </div>
                 <div>
                     <h3>Nodes</h3>
                     {nodeTypes}

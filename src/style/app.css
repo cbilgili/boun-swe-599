@@ -1,0 +1,14 @@
+.bg-gray {
+    background-color: #ebebeb;
+}
+
+.navbar-nav>li {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.navbar-nav>li a{
+    color: black;
+}

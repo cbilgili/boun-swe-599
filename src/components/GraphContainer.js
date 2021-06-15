@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import Modal from 'react-modal';
 
 import Graph from "./Graph";
-import GraphOperations from "./GraphOperations";
 import NodeEditor from "./NodeEditor";
 import NodeTypeEditor from "./NodeTypeEditor";
 import {stopEditing, stopEditingNodeType} from "../redux/actions/graphActions";
@@ -12,7 +11,6 @@ import {stopEditing, stopEditingNodeType} from "../redux/actions/graphActions";
 class GraphContainer extends React.Component {
     render() {
         return <div className="col-md-10">
-            <GraphOperations/>
             <Graph/>
             <Modal isOpen={!!this.props.editingNode} onRequestClose={this.props.stopEditing} style={{
                 content: {

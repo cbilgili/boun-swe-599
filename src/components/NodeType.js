@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DragSource } from 'react-dnd';
 import { editType } from '../redux/actions/typeEditorActions';
+import { getNodeIcon } from '../utils/icons';
 
 class NodeType extends React.Component {
     render() {
         return this.props.connectDragSource(
-            <div className="btn-block" onClick={this.onClick.bind(this)}>
-                <svg width="121" height="52" viewBox="0 0 121 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" y="0.5" width="120" height="51" rx="14.5" fill="#A0E2A3" stroke="black" />
-                </svg>
-                {this.props.nodeType.type}
+            <div className="btn-block text-center pb-4" onClick={this.onClick.bind(this)}>
+                <div>{getNodeIcon(this.props.nodeType.type)}</div> 
+                <div className="font-weight-bold">{this.props.nodeType.type}</div>
             </div>
         )
     }

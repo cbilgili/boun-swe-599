@@ -33,7 +33,7 @@ export default function nodeTypeReducer(state, action) {
         case '@@redux/INIT':
         case '@@INIT':
             return {
-                array: [1, 2],
+                array: [1, 2, 3],
                 entities: {
                     1: {
                         type: "Goal",
@@ -48,7 +48,13 @@ export default function nodeTypeReducer(state, action) {
                         name: "R",
                         weight: "",
                         n: 2
-                    }
+                    },
+                    3: {
+                        type: "Exclusion",
+                        name: "E",
+                        weight: "",
+                        n: 3
+                    },
                 }
             };
         default: {

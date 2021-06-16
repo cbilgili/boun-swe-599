@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DragSource } from 'react-dnd';
+import { getTransitionIcon } from '../utils/icons';
 
 class Transition extends React.Component {
     render() {
         return this.props.connectDragSource(
-            <div className="btn btn-primary btn-lg btn-block"  >
-                { this.props.transitions.name }
+            <div className="btn-block text-center pb-4">
+                <div>{getTransitionIcon(this.props.transitions.name)}</div> 
+                <div className="font-weight-bold">{this.props.transitions.name}</div>
             </div>
         )
     }

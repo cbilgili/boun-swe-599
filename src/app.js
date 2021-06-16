@@ -12,7 +12,6 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
-
                 <div className="container-fluid">
                     <div className="row">
                         <DndProvider backend={HTML5Backend}>

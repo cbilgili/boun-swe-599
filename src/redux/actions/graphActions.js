@@ -9,10 +9,10 @@ export function addElement(typeId, position) {
             node = new Joint.shapes.basic.Rect({
                 typeId,
                 position: position ? position : {x: 100, y: 100},
-                size: {width: 150, height: 100},
+                size: {width: 150, height: 70},
                 attrs: {
                     rect: {fill: 'rgba(0, 255, 0, 0.3)', rx: 10, ry: 10},
-                    text: {text: nodeType.name + (state.graph.goalNum + 1), fill: 'white'}
+                    text: {text: nodeType.name + (state.graph.goalNum + 1), fill: 'black', 'font-weight': 'bold', 'font-size': 11}
                 },
                 refName: nodeType.name.toLowerCase() + nodeType.n.toString(),
                 nodeType: "Goal",
@@ -206,13 +206,19 @@ export function addLink(typeId, source, target) {
             source: {id: source},
             target: target.x ? target : {id: target},
             labels: [
-                {position: 0.5}
+                {position: 0.5, 
+                    attrs: {
+                    text: {
+                        text: transition.name
+                    }
+                }}
             ],
             attrs: {
-                '.marker-target': {d: 'M 10 0 L 0 5 L 10 10 z'}
+                '.marker-target': {d: 'M 10 0 L 0 5 L 10 10 z'},
             },
             typeId
         }).toJSON();
+        link;
         dispatch({type: 'START_LINKING', link: link.id});
         dispatch({type: 'ADD_ELEMENT', element: link});
         dispatch(editElement(link.id));

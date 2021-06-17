@@ -221,7 +221,8 @@ export function addLink(typeId, source, target) {
         link;
         dispatch({type: 'START_LINKING', link: link.id});
         dispatch({type: 'ADD_ELEMENT', element: link});
-        dispatch(editElement(link.id));
+        // Disable opening editing modal on link addition.
+        //dispatch(editElement(link.id));
     }
 }
 

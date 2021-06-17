@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import NodeEditorForm from "./NodeEditorForm";
 import NodeEditorTable from "./NodeEditorTable";
 
@@ -18,7 +18,7 @@ class NodeEditor extends React.Component {
 
     render() {
         if (this.props.closed) {
-            return <div/>
+            return <div />
         } else {
             if (this.props.nodeType === "Goal") {
                 const name = (<div>
@@ -29,7 +29,7 @@ class NodeEditor extends React.Component {
                         onChange={(event) => {
                             this.props.editElementName(this.props.elementId, event.target.value);
                         }}
-                        placeholder={this.props.name}/></div>);
+                        placeholder={this.props.name} /></div>);
 
                 const description = (<div>
                     <h4>Description</h4>
@@ -39,7 +39,7 @@ class NodeEditor extends React.Component {
                         onChange={(event) => {
                             this.props.editElementDescription(this.props.elementId, event.target.value);
                         }}
-                        placeholder={this.props.description}/></div>);
+                        placeholder={this.props.description} /></div>);
 
                 const isMandatory = (<div>
                     <h4>Mandatory</h4>
@@ -49,7 +49,7 @@ class NodeEditor extends React.Component {
                         onChange={(event) => {
                             this.props.editElementMandatory(this.props.elementId, event.target.checked);
                         }}
-                        placeholder={this.props.isMandatory}/></div>);
+                        placeholder={this.props.isMandatory} /></div>);
 
                 return <div>
                     <div className="modal-header">
@@ -59,11 +59,11 @@ class NodeEditor extends React.Component {
                         {name}
                         {description}
                         {isMandatory}
-                        <NodeEditorTable/>
-                        <NodeEditorForm/></div>
+                        <NodeEditorTable />
+                        <NodeEditorForm /></div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
-                            Goal
+                        Goal
                         </button>
                         <button type="button" className="btn btn-success" onClick={() => this.closeNodeEditor()}>Save &amp; Close
                         </button>
@@ -78,7 +78,7 @@ class NodeEditor extends React.Component {
                         onChange={(event) => {
                             this.props.editElementName(this.props.elementId, event.target.value);
                         }}
-                        placeholder={this.props.name}/></div>);
+                        placeholder={this.props.name} /></div>);
                 const weight = (<div>
                     <h4>Weight</h4>
                     <input
@@ -87,7 +87,7 @@ class NodeEditor extends React.Component {
                         onChange={(event) => {
                             this.props.editEventWeight(this.props.elementId, event.target.value);
                         }}
-                        placeholder={this.props.weight}/></div>);
+                        placeholder={this.props.weight} /></div>);
 
                 return <div>
                     <div className="modal-header">
@@ -99,14 +99,13 @@ class NodeEditor extends React.Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
-                            Refinement
+                        Refinement
                         </button>
                         <button type="button" className="btn btn-success" onClick={() => this.closeNodeEditor()}>Save &amp; Close
                         </button>
                     </div>
                 </div>
             } else if (this.props.nodeType === "Contribution") {
-                console.log(this.props);
                 const weight = (<div>
                     <h4>Weight</h4>
                     <input
@@ -115,7 +114,7 @@ class NodeEditor extends React.Component {
                         onChange={(event) => {
                             this.props.editEventWeight(this.props.elementId, event.target.value);
                         }}
-                        placeholder={this.props.weight}/></div>);
+                        placeholder={this.props.weight} /></div>);
 
                 let transitions = {}
                 transitions["C+"] = "PCC";
@@ -130,15 +129,15 @@ class NodeEditor extends React.Component {
                 const relationships = (<div>
                     <h4>Relationship</h4>
                     <select className="form-control"
-                            onChange={(event) => {
-                                this.props.editElementRelationship(this.props.elementId, event.target.value);
-                            }}
-                            placeholder={this.props.relationship}
-                            defaultValue={selectedRelationship}
-                            disabled
-                            style={{
-                                height: '34px'
-                            }}>
+                        onChange={(event) => {
+                            this.props.editElementRelationship(this.props.elementId, event.target.value);
+                        }}
+                        placeholder={this.props.relationship}
+                        defaultValue={selectedRelationship}
+                        disabled
+                        style={{
+                            height: '34px'
+                        }}>
                         <option>PCC</option>
                         <option>NCC</option>
                         <option>PVC</option>
@@ -158,7 +157,7 @@ class NodeEditor extends React.Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
-                            Event
+                        Event
                         </button>
                         <button type="button" className="btn btn-success" onClick={() => this.closeNodeEditor()}>Save &amp; Close
                         </button>
@@ -208,7 +207,7 @@ function mapStateToProps(state) {
                 refName: element.refName,
             }
         }
-        console.log('element', element);
+
         return {
             nodeType: "Contribution",
             elementId: element.id,

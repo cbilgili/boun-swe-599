@@ -224,7 +224,8 @@ const spec = {
                 return;
             }
             case 'transition': {
-                const source = component.graph.findModelsFromPoint({x, y})[0];
+                // Get element under rectangle. Before it was trying to fetch under a point and it was not getting child element.
+                const source = component.graph.findModelsInArea({x: parseInt(x) - 50, y: parseInt(y) - 50, width: 100, height: 100})[0];
                 if (source) {
                     const position = source.attributes.position;
                     const size = source.attributes.size;

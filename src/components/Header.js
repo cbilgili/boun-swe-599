@@ -6,6 +6,19 @@ import { clearGraph, startEditingNodeType } from '../redux/actions/graphActions'
 
 class Header extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.inputFileRef = React.createRef();
+        // this.onFileChange = this.handleFileChange.bind(this);
+        this.onBtnClick = this.handleBtnClick.bind(this);
+    }
+
+    handleBtnClick() {
+        /*Collecting node-element and performing click*/
+        this.inputFileRef.current.click();
+    }
+
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-gray">
@@ -26,8 +39,10 @@ class Header extends React.Component {
                                 Import
         </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a className="dropdown-item" href="#">JSON File <input type="file" accept=".json" hidden
-                                    onChange={(event) => this.props.loadFile(event.target.files[0])} /></a>
+                                <a className="dropdown-item" href="#" onClick={this.onBtnClick}>JSON File </a>
+                                <input type="file" accept=".json" hidden
+                                    ref={this.inputFileRef}
+                                    onChange={(event) => this.props.loadFile(event.target.files[0])} />
                             </div>
                         </li>
                         <li className="nav-item dropdown active">

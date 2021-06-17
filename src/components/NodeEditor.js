@@ -65,7 +65,7 @@ class NodeEditor extends React.Component {
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
                             Goal
                         </button>
-                        <button type="button" className="btn btn-primary" onClick={() => this.closeNodeEditor()}>Close
+                        <button type="button" className="btn btn-success" onClick={() => this.closeNodeEditor()}>Save &amp; Close
                         </button>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ class NodeEditor extends React.Component {
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
                             Refinement
                         </button>
-                        <button type="button" className="btn btn-primary" onClick={() => this.closeNodeEditor()}>Close
+                        <button type="button" className="btn btn-success" onClick={() => this.closeNodeEditor()}>Save &amp; Close
                         </button>
                     </div>
                 </div>
@@ -116,26 +116,16 @@ class NodeEditor extends React.Component {
                             this.props.editEventWeight(this.props.elementId, event.target.value);
                         }}
                         placeholder={this.props.weight}/></div>);
-                // const selectedRelationship = name: element.name,
-                //     description: element.description,
-                
-                //         name: "C+",
-                //         relationship: "PCC",
-                //     },
-                //         name: "C-",
-                //     },
-                //         name: "V+",
-                //         relationship: "PVC",
-                //     },
-                //         name: "V-",
-                //         relationship: "NVC",
-                //     },
-                //         name: "pre",
-                //         relationship: "PR",
-                //     },
-                //         name: "Exclusion",
-                //         relationship: "EX",
-                //     }
+
+                let transitions = {}
+                transitions["C+"] = "PCC";
+                transitions["C-"] = "NCC";
+                transitions["V+"] = "PVC";
+                transitions["V-"] = "NVC";
+                transitions["pre"] = "PRE";
+                transitions["Exclusion"] = "EXC";
+
+                const selectedRelationship = transitions[this.props.name];
 
                 const relationships = (<div>
                     <h4>Relationship</h4>
@@ -144,6 +134,8 @@ class NodeEditor extends React.Component {
                                 this.props.editElementRelationship(this.props.elementId, event.target.value);
                             }}
                             placeholder={this.props.relationship}
+                            defaultValue={selectedRelationship}
+                            disabled
                             style={{
                                 height: '34px'
                             }}>
@@ -154,10 +146,6 @@ class NodeEditor extends React.Component {
                         <option>EXC</option>
                         <option>PRE</option>
                     </select>
-                    <h5>Selected</h5>
-                    <input
-                        type="text"
-                        value={this.props.relationship}/>
                 </div>);
 
                 return <div>
@@ -172,7 +160,7 @@ class NodeEditor extends React.Component {
                         <button type="button" className="btn btn-warning" onClick={() => this.deleteNode()}>Delete
                             Event
                         </button>
-                        <button type="button" className="btn btn-primary" onClick={() => this.closeNodeEditor()}>Close
+                        <button type="button" className="btn btn-success" onClick={() => this.closeNodeEditor()}>Save &amp; Close
                         </button>
                     </div>
                 </div>

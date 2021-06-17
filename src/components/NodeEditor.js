@@ -55,7 +55,7 @@ class NodeEditor extends React.Component {
                     <div className="modal-header">
                         <h2 className="modal-title">Goal Properties</h2>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                         {name}
                         {description}
                         {isMandatory}
@@ -106,6 +106,7 @@ class NodeEditor extends React.Component {
                     </div>
                 </div>
             } else if (this.props.nodeType === "Contribution") {
+                console.log(this.props);
                 const weight = (<div>
                     <h4>Weight</h4>
                     <input
@@ -115,6 +116,26 @@ class NodeEditor extends React.Component {
                             this.props.editEventWeight(this.props.elementId, event.target.value);
                         }}
                         placeholder={this.props.weight}/></div>);
+                // const selectedRelationship = name: element.name,
+                //     description: element.description,
+                
+                //         name: "C+",
+                //         relationship: "PCC",
+                //     },
+                //         name: "C-",
+                //     },
+                //         name: "V+",
+                //         relationship: "PVC",
+                //     },
+                //         name: "V-",
+                //         relationship: "NVC",
+                //     },
+                //         name: "pre",
+                //         relationship: "PR",
+                //     },
+                //         name: "Exclusion",
+                //         relationship: "EX",
+                //     }
 
                 const relationships = (<div>
                     <h4>Relationship</h4>
@@ -199,11 +220,13 @@ function mapStateToProps(state) {
                 refName: element.refName,
             }
         }
+        console.log('element', element);
         return {
             nodeType: "Contribution",
             elementId: element.id,
             refName: element.refName,
             weight: element.weight,
+            name: element.name,
             relationship: element.relationship
         }
 

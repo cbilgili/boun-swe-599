@@ -8,15 +8,19 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.inputFileRef = React.createRef();
-        // this.onFileChange = this.handleFileChange.bind(this);
+        this.smtInputRef = React.createRef();
         this.onBtnClick = this.handleBtnClick.bind(this);
+        this.onSmtSubmit = this.handleSmtSubmit.bind(this);
     }
 
     handleBtnClick() {
-        /*Collecting node-element and performing click*/
         this.inputFileRef.current.click();
+    }
+
+    handleSmtSubmit(event) {
+        event.preventDefault();
+        this.props.postSmt(this.smtInputRef.current.value)
     }
 
     render() {
@@ -56,8 +60,8 @@ class Header extends React.Component {
                         </li>
                     </ul>
                     <form className="form-inline my-1 pl-4">
-                        <input className="form-control mt-2 mr-sm-2" type="search" placeholder="Expression" aria-label="Search" />
-                        <button className="btn btn-outline-success mt-2 my-sm-0" type="submit" onClick={(event) => this.props.postSmt(event.target.value)}>Solve</button>
+                        <input className="form-control mt-2 mr-sm-2" type="search" placeholder="Expression" aria-label="Search" ref={this.smtInputRef} />
+                        <button className="btn btn-outline-success mt-2 my-sm-0" type="submit" onClick={this.onSmtSubmit}>Solve</button>
                     </form>
                 </div>
             </nav>

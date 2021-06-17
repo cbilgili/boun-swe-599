@@ -97,7 +97,11 @@ class Graph extends React.Component {
                     this.props.stopLinking();
                 } else {
                     this.props.stopLinking();
-                    this.updateGraph.bind(this)(this.props.elements);
+                    try {
+                        this.updateGraph.bind(this)(this.props.elements);
+                    } catch(err) {
+                        console.log('Error on handlePointerUp', err);
+                    }
                 }
 
             }
@@ -150,7 +154,11 @@ class Graph extends React.Component {
 
     updateGraph(elements, origin) {
         this.graph.fromJSON({cells: elements});
-        this.paper.setOrigin(origin.x, origin.y);
+        try {
+            this.paper.setOrigin(origin.x, origin.y);
+        } catch (err) {
+            console.log('Error on setting origin', err);
+        }
     }
 
     render() {
